@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 
 app.use('/api/products', productRoutes);
+app.use('/api/produtos', productRoutes);
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
