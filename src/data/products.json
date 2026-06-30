@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "1782789844507",
+    "title": "Teste",
+    "description": "Teste",
+    "price": 10,
+    "category": "feminino",
+    "whatsapp": "5542988505792",
+    "image": null,
+    "createdAt": "2026-06-30T03:24:04.507Z"
+  }
+]

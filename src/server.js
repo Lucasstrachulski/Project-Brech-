@@ -30,6 +30,11 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(ADMIN_DIR, 'index.html'));
 });
 
+app.use((err, req, res, next) => {
+  console.error('Erro:', err.message);
+  res.status(500).json({ error: err.message || 'Erro interno do servidor' });
+});
+
 app.listen(PORT, () => {
   console.log(`\n🛍️  Engordei Perdi rodando em http://localhost:${PORT}`);
   console.log(`🔐 Painel admin em http://localhost:${PORT}/admin`);
