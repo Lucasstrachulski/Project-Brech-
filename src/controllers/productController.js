@@ -1,23 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-const { DATA_DIR } = require('../config');
+const redis = require('../config/database');
 
-const DATA_FILE = path.join(DATA_DIR, 'products.json');
+const PRODUCTS_KEY = 'products';
 
-function readProducts() {
-  if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, '[]', 'utf-8');
-  }
-  const data = fs.readFileSync(DATA_FILE, 'utf-8');
-  return JSON.parse(data);
+async function getProducts() {
+  const data = await redis.get(PRODUCTS_KEY);
+  return data || [];
 }
 
-function writeProducts(products) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(products, null, 2), 'utf-8');
+async function saveProducts(products) {
+  await redis.set(PRODUCTS_KEY, products);
 }
 
-function getAll(req, res) {
-  const products = readProducts();
+async function getAll(req, res) {
+  const products = await getProducts();
   const { category } = req.query;
   if (category && category !== 'todos') {
     const filtered = products.filter(p => p.category === category);
@@ -26,15 +21,15 @@ function getAll(req, res) {
   res.json(products);
 }
 
-function getById(req, res) {
-  const products = readProducts();
+async function getById(req, res) {
+  const products = await getProducts();
   const product = products.find(p => p.id === req.params.id);
   if (!product) return res.status(404).json({ error: 'Produto não encontrado' });
   res.json(product);
 }
 
-function create(req, res) {
-  const products = readProducts();
+async function create(req, res) {
+  const products = await getProducts();
   const { title, description, price, category, whatsapp } = req.body;
 
   if (!title || !description || !price || !category) {
@@ -48,17 +43,17 @@ function create(req, res) {
     price: parseFloat(price),
     category,
     whatsapp: whatsapp || '5542988505792',
-    image: req.file ? `/uploads/${req.file.filename}` : null,
+    image: req.file ? req.file.path : null,
     createdAt: new Date().toISOString()
   };
 
   products.push(newProduct);
-  writeProducts(products);
+  await saveProducts(products);
   res.status(201).json(newProduct);
 }
 
-function update(req, res) {
-  const products = readProducts();
+async function update(req, res) {
+  const products = await getProducts();
   const index = products.findIndex(p => p.id === req.params.id);
 
   if (index === -1) {
@@ -74,33 +69,24 @@ function update(req, res) {
   if (category) product.category = category;
   if (whatsapp) product.whatsapp = whatsapp;
   if (req.file) {
-    if (product.image) {
-      const oldPath = path.join(__dirname, '..', '..', product.image);
-      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-    }
-    product.image = `/uploads/${req.file.filename}`;
+    product.image = req.file.path;
   }
 
   products[index] = product;
-  writeProducts(products);
+  await saveProducts(products);
   res.json(product);
 }
 
-function remove(req, res) {
-  let products = readProducts();
+async function remove(req, res) {
+  let products = await getProducts();
   const product = products.find(p => p.id === req.params.id);
 
   if (!product) {
     return res.status(404).json({ error: 'Produto não encontrado' });
   }
 
-  if (product.image) {
-    const imagePath = path.join(__dirname, '..', '..', product.image);
-    if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
-  }
-
   products = products.filter(p => p.id !== req.params.id);
-  writeProducts(products);
+  await saveProducts(products);
   res.json({ message: 'Produto removido com sucesso' });
 }
 

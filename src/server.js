@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(PUBLIC_DIR));
 app.use('/admin', express.static(ADMIN_DIR));
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
