@@ -29,7 +29,7 @@ app.get('/admin', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error('Erro:', err.message);
+  console.error('Erro completo:', JSON.stringify(err, Object.getOwnPropertyNames(err)));
   res.status(500).json({ error: err.message || 'Erro interno do servidor' });
 });
 
