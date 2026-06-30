@@ -71,8 +71,8 @@ npm start
 ```
 
 4. Acesse:
-- Site público: http://localhost:3000
-- Painel admin: http://localhost:3000/admin
+- Site público: https://project-brech.vercel.app
+- Painel admin: https://project-brech.vercel.app/admin
 
 ## Senha do Admin
 - Senha padrão: `brecho2024`
