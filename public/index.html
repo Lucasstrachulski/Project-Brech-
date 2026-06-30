@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engordei Perdi - O Seu Brechó</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="img/logo.jpeg" alt="Logo Engordei Perdi" class="logo-img">
+        <h1>Engordei Perdi</h1>
+      </div>
+      <p class="tagline">O seu brechó</p>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <button class="nav-btn active" data-category="todos">
+        <i class="fas fa-th-large"></i> Todos
+      </button>
+      <button class="nav-btn" data-category="feminino">
+        <i class="fas fa-venus"></i> Feminino
+      </button>
+      <button class="nav-btn" data-category="masculino">
+        <i class="fas fa-mars"></i> Masculino
+      </button>
+      <button class="nav-btn" data-category="infantil">
+        <i class="fas fa-child"></i> Infantil
+      </button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Encontre peças únicas</h2>
+        <p>Moda sustainável e com personalidade. Cada peça tem uma história para contar.</p>
+      </div>
+    </section>
+
+    <div class="products-container">
+      <div class="products-grid" id="productsGrid">
+        <!-- Produtos serão carregados dinamicamente -->
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="fas fa-tshirt"></i>
+        <h3>Nenhuma peça encontrada</h3>
+        <p>Em breve novidades por aqui!</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Detalhes -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-body">
+        <div class="modal-image" id="modalImage"></div>
+        <div class="modal-info">
+          <span class="modal-category" id="modalCategory"></span>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-description" id="modalDescription"></p>
+          <div class="modal-price" id="modalPrice"></div>
+          <a href="#" target="_blank" class="whatsapp-btn modal-whatsapp" id="modalWhatsapp">
+            <i class="fab fa-whatsapp"></i>
+            Falar com a Dona no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Engordei Perdi. Feito com <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

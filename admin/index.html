@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Engordei Perdi</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-header">
+        <i class="fas fa-lock"></i>
+        <h2>Painel Administrativo</h2>
+        <p>Engordei Perdi</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="password">Senha de acesso</label>
+          <input type="password" id="password" placeholder="Digite a senha" required>
+        </div>
+        <button type="submit" class="btn-primary">
+          <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+        <div class="login-error" id="loginError" style="display: none;">
+          Senha incorreta. Tente novamente.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div class="admin-dashboard" id="adminDashboard" style="display: none;">
+    <header class="admin-header">
+      <div class="admin-header-content">
+        <h1><i class="fas fa-heart"></i> Engordei Perdi</h1>
+        <div class="header-actions">
+          <a href="/" target="_blank" class="btn-outline">
+            <i class="fas fa-eye"></i> Ver Site
+          </a>
+          <button class="btn-outline" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <div class="admin-container">
+        <!-- Form Section -->
+        <section class="form-section">
+          <h2><i class="fas fa-plus-circle"></i> Cadastrar Nova Peça</h2>
+          <form id="productForm" enctype="multipart/form-data">
+            <input type="hidden" id="productId">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="title">Título *</label>
+                <input type="text" id="title" placeholder="Ex: Vestido Floral" required>
+              </div>
+
+              <div class="form-group">
+                <label for="category">Categoria *</label>
+                <select id="category" required>
+                  <option value="">Selecione...</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="infantil">Infantil</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Descrição *</label>
+              <textarea id="description" rows="3" placeholder="Descreva a peça..." required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="price">Preço (R$) *</label>
+                <input type="number" id="price" step="0.01" min="0" placeholder="0.00" required>
+              </div>
+
+              <div class="form-group">
+                <label for="whatsapp">WhatsApp (com DDD)</label>
+                <input type="text" id="whatsapp" placeholder="5511999999999" value="5511999999999">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="image">Foto da Peça</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="image" accept="image/*">
+                <label for="image" class="file-input-label">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <span>Escolher imagem</span>
+                </label>
+              </div>
+              <div class="image-preview" id="imagePreview" style="display: none;">
+                <img id="previewImg" src="" alt="Preview">
+                <button type="button" class="remove-image" id="removeImage">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-save"></i> Salvar Peça
+              </button>
+              <button type="button" class="btn-secondary" id="cancelBtn" style="display: none;">
+                <i class="fas fa-times"></i> Cancelar
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Products List -->
+        <section class="products-section">
+          <h2><i class="fas fa-list"></i> Peças Cadastradas</h2>
+          <div class="products-list" id="productsList">
+            <!-- Produtos serão carregados dinamicamente -->
+          </div>
+
+          <div class="empty-admin" id="emptyAdmin" style="display: none;">
+            <i class="fas fa-box-open"></i>
+            <p>Nenhuma peça cadastrada ainda.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
