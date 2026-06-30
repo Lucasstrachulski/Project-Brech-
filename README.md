@@ -77,6 +77,10 @@ npm start
 ## Senha do Admin
 - Senha padrão: `brecho2024`
 
+## Contato
+- WhatsApp: (42) 98850-5792
+- Instagram: @engordei_perdi1209
+
 ## Tecnologias
 - Backend: Node.js + Express
 - Frontend: HTML/CSS/JavaScript puro

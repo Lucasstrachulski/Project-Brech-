@@ -47,7 +47,7 @@ function create(req, res) {
     description,
     price: parseFloat(price),
     category,
-    whatsapp: whatsapp || '5511999999999',
+    whatsapp: whatsapp || '5542988505792',
     image: req.file ? `/uploads/${req.file.filename}` : null,
     createdAt: new Date().toISOString()
   };
